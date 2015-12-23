@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+	<property>
+		<name>redis_log_dir</name>
+		<value>/var/log/redis</value>
+		<description>Redis Log dir</description>
+	</property>
+
+	<property>
+		<name>redis_user</name>
+		<value>redis</value>
+		<description>User redis daemon runs as</description>
+	</property>
+
+	<property>
+		<name>redis_group</name>
+		<value>redis</value>
+		<description>Redis group</description>
+	</property>
+
+	<property>
+		<name>redis_data_dir</name>
+		<value></value>
+		<description>Redis Data Dir</description>
+	</property>
+
+	
+
+</configuration>
