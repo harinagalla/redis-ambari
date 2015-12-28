@@ -82,12 +82,18 @@ class Master(Script):
 		Execute('echo pid file ' + status_params.redis_pid_file)
     		Execute('service redis start >>' + params.stack_log, user=params.redis_user)
 
-		Execute
 
   #To get status of the, use the linux service status command
   def status(self, env):
     import params
+    import status_params
+    check_process_status(status_params.redis_pid_file)
     Execute('service redis status')
 
+def set_conf_bin(self, env):
+    import params
+      params.conf_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'conf'])
+      params.bin_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'bin'])
+   
 if __name__ == "__main__":
   Master().execute()
