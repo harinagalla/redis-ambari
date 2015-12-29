@@ -7,6 +7,12 @@
 		<value>/var/log/redis</value>
 		<description>Redis Log dir</description>
 	</property>
+	
+	<property>
+		<name>redis_pid_dir</name>
+		<value>/var/run</value>
+		<description>Dir containing process ID file</description>
+	</property>
 
 	<property>
 		<name>redis_user</name>
