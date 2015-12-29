@@ -25,3 +25,4 @@ redis_group = config['configurations']['redis-bootstrap-env']['redis_group']
 redis_log_dir = config['configurations']['redis-bootstrap-env']['redis_log_dir']
 redis_log_file = os.path.join(redis_log_dir,'redis_setup.log')
 
+temp_file='/tmp/'+redis_dirname+'.zip'
