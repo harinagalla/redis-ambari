@@ -22,7 +22,7 @@
 
 	<property>
 		<name>redis_data_dir</name>
-		<value></value>
+		<value>/data/redis</value>
 		<description>Redis Data Dir</description>
 	</property>
 
