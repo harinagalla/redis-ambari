@@ -14,7 +14,7 @@ redis_dirname = 'redis-3.0.6'
 redis_install_dir = config['configurations']['redis-ambari-config']['redis.install_dir']
 redis_port = config['configurations']['redis-ambari-config']['redis.port']
 
-redis_dir = os.path.join(*[redis_install_dir,nifi_dir_name])
+redis_dir = os.path.join(*[redis_install_dir,nifi_dirname])
 conf_dir=''
 bin_dir=''
 
