@@ -55,7 +55,7 @@ class Master(Script):
 	  import params
 	  import status_params
 	  Execute('service redis stop >>' + params.redis_log_file, user= params.redis_user)
-	  Execute('rm ' status_params.redis_pid_file)
+	  Execute('rm ' + status_params.redis_pid_file)
 	  
 	def start(self, env):
 	  import params
