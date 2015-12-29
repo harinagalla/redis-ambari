@@ -10,7 +10,7 @@ class Master(Script):
   	service_packagedir = os.path.realpath(__file__).split('/scripts')[0]
   	
   	self.install_packages(env)
-  	self.create_linux_user(self, params.redis_user, params.redis_group)
+  	self.create_linux_user(params.redis_user, params.redis_group)
   	if params.redis_user != 'root':
   		Execute('cp /etc/sudoers /etc/sudoers.bak')
   		Execute('echo "'+params.redis_user+' ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers')
