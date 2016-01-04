@@ -31,12 +31,12 @@ class Master(Script):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('make'+ user=params.redis_user)
-  	  Execute('make test'+ user=params.redis_user)
-  	  Execute('make install'+ user=params.redis_user)
+  	  Execute('make' + params.redis_log_file, user=params.redis_user)
+  	  Execute('make test' + params.redis_log_file, user=params.redis_user)
+  	  Execute('make install' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd utils')
-  	  Execute('chmod +x install_server.sh'+ user=params.redis_user)
-  	  Execute('./install_server.sh'+ user=params.redis_user)
+  	  Execute('chmod +x install_server.sh' + params.redis_log_file, user=params.redis_user)
+  	  Execute('./install_server.sh' + params.redis_log_file, user=params.redis_user)
   	self.configure(env,True)
 	
   def create_linux_user(self, user, group):
