@@ -25,14 +25,13 @@ class Master(Script):
   	Execute('rm -rf ' + params.redis_dir, ignore_failures=True)
   	Execute('mkdir -p ' + params.redis_dir)
   	Execute('chown -R ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_dir)
-  	Execute('mkdir -p ' + params.redis_log_dir)
-  	Execute('chown -R ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_log_dir)
   	Execute('echo Installing pachages')
   	
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir)
+  	  Execute('make')
   	  Execute('make test')
   	  Execute('make install')
   	  Execute('cd utils')
@@ -63,7 +62,7 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('service redis start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
