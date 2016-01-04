@@ -62,7 +62,7 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('redis-server >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
