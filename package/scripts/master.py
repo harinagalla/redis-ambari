@@ -23,7 +23,7 @@ class Master(Script):
   	  )
   	Execute('touch ' + params.redis_log_file, user=params.redis_user)
   	Execute('rm -rf ' + params.redis_dir, ignore_failures=True)
-  	Ececute('mkdir -p ' + params.redis_dir)
+  	Execute('mkdir -p ' + params.redis_dir)
   	Execute('chown -R ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_dir)
   	Execute('echo Installing pachages')
   	
