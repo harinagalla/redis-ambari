@@ -61,13 +61,13 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('service redis start >>' + params.stack_log, user=params.redis_user)
+	  Execute('service redis start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
 	  check_process_status(status_params.redis_pid_file)
-	  Execute('service redis status >>' + params.stack_log, user=params.redis_user)
+	  Execute('service redis status >>' + params.redis_log_file, user=params.redis_user)
 	
   def set_conf_bin(self, env):
 	  import params
