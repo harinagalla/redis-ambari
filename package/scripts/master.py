@@ -33,10 +33,10 @@ class Master(Script):
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('make'+ user=params.redis_user)
   	  Execute('make test'+ user=params.redis_user)
-  	  Execute('make install'+ ' >> '+ user=params.redis_user)
+  	  Execute('make install'+ user=params.redis_user)
   	  Execute('cd utils')
   	  Execute('chmod +x install_server.sh'+ user=params.redis_user)
-  	  Execute('./install_server.sh'+ ' >> '+ user=params.redis_user)
+  	  Execute('./install_server.sh'+ user=params.redis_user)
   	self.configure(env,True)
 	
   def create_linux_user(self, user, group):
