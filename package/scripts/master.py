@@ -29,7 +29,7 @@ class Master(Script):
   	
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
-  	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
+  	  Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir)
   	  Execute('make')
   	  Execute('make test')
