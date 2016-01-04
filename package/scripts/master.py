@@ -31,7 +31,7 @@ class Master(Script):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('make'+ params.redis_log_file, user=params.redis_user)
+  	  Execute('sudo -u redis make')
   	  Execute('make test'+ params.redis_log_file, user=params.redis_user)
   	  Execute('make install'+ params.redis_log_file, user=params.redis_user)
   	  Execute('cd utils')
