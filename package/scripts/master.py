@@ -34,6 +34,9 @@ class Master(Script):
   	  Execute('make')
   	  Execute('make test')
   	  Execute('make install')
+  	  Execute('cd utils')
+  	  Execute('chmod +x install_server.sh')
+  	  Execute('./install_server.sh')
   	self.configure(env,True)
 	
   def create_linux_user(self, user, group):
