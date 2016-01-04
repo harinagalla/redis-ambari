@@ -39,38 +39,38 @@ class Master(Script):
   	  Execute('./install_server.sh')
   	self.configure(env,True)
 	
-	def create_linux_user(self, user, group):
+  def create_linux_user(self, user, group):
 	  try: pwd.getpwnam(user)
 	  except KeyError: Execute('adduser ' + user)
 	  try: grp.getgrnam(group)
 	  except KeyError: Execute('groupadd ' + group)
 	  
-	def configure(self, env, isInstall=False):
+  def configure(self, env, isInstall=False):
 	  import params
 	  import status_params
 	  env.set_params(params)
 	  env.set_params(status_params)
 	  
-	def stop(self, env):
+  def stop(self, env):
 	  import params
 	  import status_params
 	  Execute('service redis stop >>' + params.redis_log_file, user= params.redis_user)
 	  Execute('rm ' + status_params.redis_pid_file)
 	  
-	def start(self, env):
+  def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
 	  Execute('service redis start >>' + params.stack_log, user=params.redis_user)
 	
-	def status(self, env):
+  def status(self, env):
 	  import params
 	  import status_params
 	  check_process_status(status_params.redis_pid_file)
 	  Execute('service redis status >>' + params.stack_log, user=params.redis_user)
 	
-	def set_conf_bin(self, env):
+  def set_conf_bin(self, env):
 	  import params
 	  params.conf_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'conf'])
 	  params.bin_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'bin'])
