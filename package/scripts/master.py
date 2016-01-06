@@ -31,9 +31,10 @@ class Master(Script):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('make Makefile' + params.redis_log_file, user=params.redis_user )
-  	  Execute('make test' + params.redis_log_file, user=params.redis_user)
-  	  Execute('make install' + params.redis_log_file, user=params.redis_user)
+  	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
+  	  Execute('make')
+  	  Execute('make test')
+  	  Execute('make install')
   	  Execute('cd utils')
   	  Execute('chmod +x install_server.sh')
   	  Execute('./install_server.sh')
@@ -54,7 +55,7 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  import status_params
-	  Execute('service redis stop >>' + params.redis_log_file, user= params.redis_user)
+	  Execute('/opt/redis-3.0.6/src/redis-server stop >>' + params.redis_log_file, user= params.redis_user)
 	  Execute('rm ' + status_params.redis_pid_file)
 	  
   def start(self, env):
@@ -62,13 +63,13 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('/opt/redis-3.0.6/src/redis-server >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('/opt/redis-3.0.6/src/redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
 	  check_process_status(status_params.redis_pid_file)
-	  Execute('service redis status >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('/opt/redis-3.0.6/src/redis-server status >>' + params.redis_log_file, user=params.redis_user)
 	
   def set_conf_bin(self, env):
 	  import params
