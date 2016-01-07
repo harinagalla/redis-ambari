@@ -63,19 +63,16 @@ class Master(Script):
 	  import params
 	  import status_params
 	  Execute('service redis-server stop >>' + params.redis_log_file, user= params.redis_user)
-	  Execute('rm ' + status_params.redis_pid_file)
 	  
   def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('echo pid file ' + status_params.redis_pid_file)
 	  Execute('/etc/init.d/redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
-	  check_process_status(status_params.redis_pid_file)
 	  Execute('service redis-server status >>' + params.redis_log_file, user=params.redis_user)
 	  
   def restart(self, env):
