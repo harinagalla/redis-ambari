@@ -29,13 +29,13 @@ class Master(Script):
   	
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
-  	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
+  	  Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('make')
   	  Execute('make test')
-  	  Execute('mkdir /etc/redis')
-  	  Execute('mkdir /var/lib/redis')
+  	  Execute('mkdir -p /etc/redis')
+  	  Execute('mkdir -p /var/lib/redis')
   	  Execute('cp redis-server /usr/local/bin')
   	  Execute('cp redis.conf /etc/redis')
   	  Execute('mv redis-server /etc/init.d')
@@ -67,7 +67,7 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('/etc/init.d/redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
