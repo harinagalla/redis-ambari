@@ -29,9 +29,9 @@ class Master(Script):
   	
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
-  	  Execute('tar xzvf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
-  	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
+  	Execute('tar xzvf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
+  	Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
+  	Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
   	  
   	Execute('make')
   	Execute('make test')
