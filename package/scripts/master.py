@@ -32,6 +32,7 @@ class Master(Script):
   	  Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
+  	  Execute('chown -R root:root '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('make'+ ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('make test'+ ' -a ' + params.redis_log_file, user=params.redis_user)
   	  Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server'+ ' -a ' + params.redis_log_file, user=params.redis_user)
