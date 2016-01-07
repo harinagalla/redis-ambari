@@ -33,8 +33,8 @@ class Master(Script):
   	Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
   	  
-  	Execute('make')
-  	Execute('make test')
+  	Execute('make', user=params.redis_user)
+  	Execute('make test', user=params.redis_user)
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server', user=params.redis_user)
   	Execute('rm redis.conf')
   	Exwcute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf', user=params.redis_user)
