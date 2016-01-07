@@ -32,13 +32,16 @@ class Master(Script):
   	  Execute('tar zxf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('chown -R root:root '+params.redis_install_dir+'/redis-3.0.6')
-  	  Execute('make Makefile')
+  	  Execute('make')
   	  Execute('make test')
-  	  Execute('make INSTALL')
-  	  Execute('cd utils')
-  	  Execute('chmod +x install_server.sh')
-  	  Execute('./install_server.sh')
+  	  Execute('mkdir /etc/redis')
+  	  Execute('mkdir /var/lib/redis')
+  	  Execute('cp redis-server /usr/local/bin')
+  	  Execute('cp redis.conf /etc/redis')
+  	  Execute('mv redis-server /etc/init.d')
+  	  Execute('chmod 755 /etc/init.d/redis-server')
+  	  Execute('chkconfig --add redis-server')
+  	  Execute('chkconfig --level 345 redis-server on')
   	self.configure(env,True)
 	
   def create_linux_user(self, user, group):
@@ -56,7 +59,7 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  import status_params
-	  Execute('/opt/redis-3.0.6/src/redis-server stop >>' + params.redis_log_file, user= params.redis_user)
+	  Execute('service redis-server stop >>' + params.redis_log_file, user= params.redis_user)
 	  Execute('rm ' + status_params.redis_pid_file)
 	  
   def start(self, env):
@@ -64,13 +67,18 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('echo pid file ' + status_params.redis_pid_file)
-	  Execute('/opt/redis-3.0.6/src/redis-server start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
 	  check_process_status(status_params.redis_pid_file)
-	  Execute('/opt/redis-3.0.6/src/redis-server status >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('service redis-server status >>' + params.redis_log_file, user=params.redis_user)
+	  
+  def restart(self, env):
+  	import params
+  	import status_params
+  	Execute('service redis-server restart >>' + params.redis_log_file, user=params.redis_user)
 	
   def set_conf_bin(self, env):
 	  import params
