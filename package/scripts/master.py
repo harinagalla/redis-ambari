@@ -29,10 +29,10 @@ class Master(Script):
   	
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
-  	  Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
+  	  Execute('tar xzvf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	  Execute('cd '+params.redis_install_dir+'/redis-3.0.6')
   	  Execute('chmod +x '+params.redis_install_dir+'/redis-3.0.6')
-  	 
+  	  
   	  Execute('make', user=params.redis_user)
   	  Execute('make test', user=params.redis_user)
   	  Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server', user=params.redis_user)
@@ -84,10 +84,5 @@ class Master(Script):
   	import status_params
   	Execute('service redis-server restart >>' + params.redis_log_file, user=params.redis_user)
 	
-  def set_conf_bin(self, env):
-	  import params
-	  params.conf_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'conf'])
-	  params.bin_dir = os.path.join(*[params.redis_install_dir,params.redis_dirname,'bin'])
-
 if __name__ == "__main__":
   Master().execute()
