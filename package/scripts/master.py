@@ -32,6 +32,8 @@ class Master(Script):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	Execute('cd '+params.redis_dir+'; make', user=params.redis_user)
+  	Execute('cd '+params.redis_dir+'; make test', user=params.redis_user)
+  	Execute('cd '+params.redis_dir+'; make install', user=params.redis_user)
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server /opt/redis-3.0.6')
   	Execute('rm /opt/redis-3.0.6/redis.conf')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6')
@@ -60,18 +62,18 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  import status_params
-	  Execute('/etc/init.d/redis-server stop >>' + params.redis_log_file, user= params.redis_user)
+	  Execute('/etc/init.d/redis-server stop >> ' + params.redis_log_file, user= params.redis_user)
 	  
   def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('cd '+params.redis_dir+'; service redis-server start ', user=params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
-	  Execute('service redis-server status >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('service redis-server status >> ' + params.redis_log_file, user=params.redis_user)
 	  
   def restart(self, env):
   	import params
