@@ -60,13 +60,13 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  import status_params
-	  Execute('service redis-server stop >>' + params.redis_log_file, user= params.redis_user)
+	  Execute('/etc/init.d/redis-server stop >>' + params.redis_log_file, user= params.redis_user)
 	  
   def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('/etc/init.d/redis-server start >>' + params.redis_log_file, user=params.redis_user)
+	  Execute('service redis-server start >>' + params.redis_log_file, user=params.redis_user)
 	
   def status(self, env):
 	  import params
