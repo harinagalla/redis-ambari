@@ -34,6 +34,7 @@
                 <packages>
 			<package><name>gcc*</name></package>
 			<package><name>tcl</name></package>
+			<package><name>glib</name></package>
                 </packages>
               </osSpecific>
             </osSpecifics>
