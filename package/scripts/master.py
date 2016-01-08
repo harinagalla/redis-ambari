@@ -34,7 +34,7 @@ class Master(Script):
   	Execute('cd '+params.redis_dir+'; make', user=params.redis_user)
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server /opt/redis-3.0.6')
   	Execute('rm /opt/redis-3.0.6/redis.conf')
-  	Exwcute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6')
+  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6')
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
   	Execute('cp redis-server /usr/local/bin')
