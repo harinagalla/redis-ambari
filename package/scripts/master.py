@@ -31,12 +31,18 @@ class Master(Script):
   	if not os.path.exists(params.temp_file):
   	  Execute('wget ' + stable_package + ' -O ' + params.temp_file + ' -a ' + params.redis_log_file, user=params.redis_user)
   	Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
-  	Execute('cd '+params.redis_dir+'; make', user=params.redis_user)
-  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server /opt/redis-3.0.6', user=params.redis_user)
-  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis')
-  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6', user=params.redis_user)
+  	Execute('cd '+params.redis_dir+'; make')
+  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server /opt/redis-3.0.6')
+  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis; rm /usr/local/bin/redis-server; rm /etc/init.d/redis-server')
+  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6')
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
+  	Execute('cp /opt/redis-3.0.6/redis-server /usr/local/bin')
+  	Execute('mv /opt/redis-3.0.6/redis-server /etc/init.d')
+  	Execute('cp /opt/redis-3.0.6/redis.conf /etc/redis')
+  	Execute('chmod 755 /etc/init.d/redis-server')
+  	Execute('chkconfig --add redis-server')
+  	Execute('chkconfig --level 345 redis-server on')
   
   	self.configure(env,True)
 	
