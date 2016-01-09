@@ -37,12 +37,7 @@ class Master(Script):
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6', user=params.redis_user)
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
-  	Execute('cp /opt/redis-3.0.6/redis-server /usr/local/bin')
-  	Execute('mv /opt/redis-3.0.6/redis-server /etc/init.d')
-  	Execute('cp /opt/redis-3.0.6/redis.conf /etc/redis')
-  	Execute('chmod 755 /etc/init.d/redis-server')
-  	Execute('chkconfig --add redis-server')
-  	Execute('chkconfig --level 345 redis-server on')
+  
   	self.configure(env,True)
 	
   def create_linux_user(self, user, group):
