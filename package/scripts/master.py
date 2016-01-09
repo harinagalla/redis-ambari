@@ -67,7 +67,7 @@ class Master(Script):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('/usr/local/bin/redis-server start ', user=params.redis_user)
+	  Execute('/etc/init.d/redis-server start')
 	
   def status(self, env):
 	  import params
