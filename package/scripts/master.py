@@ -34,7 +34,7 @@ class Master(Script):
   	Execute('cd '+params.redis_dir+'; make')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server -O /opt/redis-3.0.6/redis-server')
   	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis')
-  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf -O /opt/redis-3.0.6/rdis.conf')
+  	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf -O /opt/redis-3.0.6/redis.conf')
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
   	Execute('cp /opt/redis-3.0.6/redis-server /usr/local/bin')
