@@ -33,16 +33,16 @@ class Master(Script):
   	Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	Execute('cd '+params.redis_dir+'; make')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server -O /opt/redis-3.0.6/redis-server')
-  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis')
+  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis; rm /usr/local/bin/redis-server; rm /etc/init.d/redis-server')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf -O /opt/redis-3.0.6/redis.conf')
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
   	Execute('cp /opt/redis-3.0.6/redis-server /usr/local/bin')
   	Execute('mv /opt/redis-3.0.6/redis-server /etc/init.d')
   	Execute('cp /opt/redis-3.0.6/redis.conf /etc/redis')
-  	Execute('chmod 755 /etc/init.d/redis-server')
-  	Execute('chkconfig --add redis-server')
-  	Execute('chkconfig --level 345 redis-server on')
+  	Execute('chmod 755 /etc/init.d/redis-server', user=params.redis_user)
+  	Execute('chkconfig --add redis-server', user=params.redis_user)
+  	Execute('chkconfig --level 345 redis-server on', user=params.redis_user)
   
   	self.configure(env,True)
 	
@@ -67,7 +67,7 @@ class Master(Script):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('/etc/init.d/redis-server start ', user=params.redis_user)
+	  Execute('/usr/local/bin/redis-server start ', user=params.redis_user)
 	
   def status(self, env):
 	  import params
