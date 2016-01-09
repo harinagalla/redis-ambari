@@ -33,7 +33,7 @@ class Master(Script):
   	Execute('tar xvzf ' + params.temp_file+' -C ' + params.redis_install_dir + ' >> ' + params.redis_log_file, user=params.redis_user)
   	Execute('cd '+params.redis_dir+'; make')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis-server /opt/redis-3.0.6')
-  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis; rm /usr/local/bin/redis-server; rm /etc/init.d/redis-server')
+  	Execute('rm /opt/redis-3.0.6/redis.conf; rm -rf /etc/redis; rm -rf /var/lib/redis')
   	Execute('wget https://raw.githubusercontent.com/harinagalla/redis-ambari/patch-2/configuration/redis.conf /opt/redis-3.0.6')
   	Execute('mkdir -p /etc/redis')
   	Execute('mkdir -p /var/lib/redis')
