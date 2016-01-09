@@ -40,9 +40,9 @@ class Master(Script):
   	Execute('cp /opt/redis-3.0.6/redis-server /usr/local/bin')
   	Execute('mv /opt/redis-3.0.6/redis-server /etc/init.d')
   	Execute('cp /opt/redis-3.0.6/redis.conf /etc/redis')
-  	Execute('chmod 755 /etc/init.d/redis-server', user=params.redis_user)
-  	Execute('chkconfig --add redis-server', user=params.redis_user)
-  	Execute('chkconfig --level 345 redis-server on', user=params.redis_user)
+  	Execute('chmod 755 /etc/init.d/redis-server')
+  	Execute('chkconfig --add redis-server')
+  	Execute('chkconfig --level 345 redis-server on')
   
   	self.configure(env,True)
 	
