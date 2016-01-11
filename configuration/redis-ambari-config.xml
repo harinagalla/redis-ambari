@@ -20,7 +20,7 @@
 
   	<property>
     		<name>redis.log</name>
-    		<value>/var/log/redis-amabri.log</value>
+    		<value>/var/log/redis.log</value>
     		<description>Log file for redis service commands used by amabari. Not the Redis server logs</description>
   	</property> 
 
