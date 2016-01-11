@@ -22,7 +22,6 @@ class Master(Script):
   	  recursive=True
   	  )
   	Execute('touch ' + params.redis_log_file, user=params.redis_user)
-  	Execute('touch ' + params.redis_log, user=params.redis_user)
   	Execute('rm -rf ' + params.redis_dir, ignore_failures=True)
   	Execute('rm ' +params.temp_file, ignore_failures=True)
   	Execute('mkdir -p ' + params.redis_dir)
