@@ -70,8 +70,7 @@ class Master(Script):
 	  import status_params
 	  self.configure(env)
 	  Execute('/etc/init.d/redis-server start >> ' + params.redis_log_file, user= params.redis_user)
-	  Execute('ps -ef | grep -i "[r]edis-server" | awk {\'print $2\'} > ' + status_params.redis_pid_file)
-	  Execute('chown '+params.redis_user+':'+params.redis_group+' ' + status_params.redis_pid_file)
+	  Execute('ps -ef | grep -i redis-server | awk {\'print $2\'} | head -n 1 > ' + status_params.redis_pid_file, user= params.redis_user)
 	
   def status(self, env):
 	  import params
