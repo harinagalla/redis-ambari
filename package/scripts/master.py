@@ -74,7 +74,8 @@ class Master(Script):
   def status(self, env):
 	  import params
 	  import status_params
-	  Execute('/etc/init.d/redis-server status >> ' + params.redis_log_file, user=params.redis_user)
+	  check_process_status(status_params.redis_pid_file)
+	  #Execute('/etc/init.d/redis-server status >> ' + params.redis_log_file, user=params.redis_user)
 	  
   def restart(self, env):
   	import params
