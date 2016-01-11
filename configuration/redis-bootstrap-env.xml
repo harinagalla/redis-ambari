@@ -15,11 +15,6 @@
 	</property>
 
 	<property>
-		<name>redis_lock_file</name>
-		<value>/var/lock/subsys/redis</value>
-	</property>
-
-	<property>
 		<name>redis_user</name>
 		<value>redis</value>
 		<description>User redis daemon runs as</description>
