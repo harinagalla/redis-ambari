@@ -63,12 +63,13 @@ class Master(Script):
 	  import params
 	  import status_params
 	  Execute('/etc/init.d/redis-server stop >> ' + params.redis_log_file, user= params.redis_user)
+	  Execute('rm /var/run/redis.pid')
 	  
   def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('/etc/init.d/redis-server start >> ' + params.redis_log_file, user= params.redis_user)
+	  Execute('/etc/init.d/redis-server start & echo $! > /var/run/redis.pid >> ' + params.redis_log_file, user= params.redis_user)
 	
   def status(self, env):
 	  import params
