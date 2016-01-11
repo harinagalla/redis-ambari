@@ -62,8 +62,9 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  import status_params
+	  Execute('touch ' + params.redis_lock_file)
+	  Execute('chown ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_lock_file)
 	  Execute('/etc/init.d/redis-server stop >> ' + params.redis_log_file, user= params.redis_user)
-	  Execute('rm /var/run/redis.pid')
 	  
   def start(self, env):
 	  import params
