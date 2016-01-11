@@ -10,7 +10,7 @@
 	
 	<property>
 		<name>redis_pid_dir</name>
-		<value>/var/run</value>
+		<value>/var/run/redis</value>
 		<description>Dir containing process ID file</description>
 	</property>
 
