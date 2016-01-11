@@ -61,20 +61,18 @@ class Master(Script):
 	  
   def stop(self, env):
 	  import params
-	  import status_params
-	  Execute('touch ' + params.redis_lock_file)
-	  Execute('chown ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_lock_file)
 	  Execute('/etc/init.d/redis-server stop >> ' + params.redis_log_file, user= params.redis_user)
 	  
   def start(self, env):
 	  import params
 	  import status_params
 	  self.configure(env)
+	  Execute('touch ' + params.redis_lock_file)
+	  Execute('chown ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_lock_file)
 	  Execute('/etc/init.d/redis-server start >> ' + params.redis_log_file, user= params.redis_user)
 	  Execute('ps -ef | grep -i redis-server | awk {\'print $2\'} | head -n 1 > ' + status_params.redis_pid_file, user= params.redis_user)
 	
   def status(self, env):
-	  import params
 	  import status_params
 	  check_process_status(status_params.redis_pid_file)
 	  #Execute('/etc/init.d/redis-server status >> ' + params.redis_log_file, user=params.redis_user)
