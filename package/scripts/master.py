@@ -68,17 +68,17 @@ class Master(Script):
 	  import params
 	  import status_params
 	  self.configure(env)
-	  Execute('/etc/init.d/redis-server start', user= params.redis_user)
+	  Execute('/etc/init.d/redis-server start >> ' + params.redis_log_file, user= params.redis_user)
 	
   def status(self, env):
 	  import params
 	  import status_params
-	  Execute('service redis-server status >> ' + params.redis_log_file, user=params.redis_user)
+	  Execute('/etc/init.d/redis-server status >> ' + params.redis_log_file, user=params.redis_user)
 	  
   def restart(self, env):
   	import params
   	import status_params
-  	Execute('service redis-server restart >>' + params.redis_log_file, user=params.redis_user)
+  	Execute('/etc/init.d/redis-server restart >>' + params.redis_log_file, user=params.redis_user)
 	
 if __name__ == "__main__":
   Master().execute()
