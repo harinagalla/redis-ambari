@@ -26,12 +26,4 @@
 		<description>Redis group</description>
 	</property>
 
-	<property>
-		<name>redis_data_dir</name>
-		<value>/data/redis</value>
-		<description>Redis Data Dir</description>
-	</property>
-
-	
-
 </configuration>
