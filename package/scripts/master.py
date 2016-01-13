@@ -44,6 +44,7 @@ class Master(Script):
   	Execute('chmod 755 /etc/init.d/redis-server')
   	Execute('chkconfig --add redis-server')
   	Execute('chkconfig --level 345 redis-server on')
+  	Execute('rm '+params.temp_file)
   
   	self.configure(env,True)
 	
