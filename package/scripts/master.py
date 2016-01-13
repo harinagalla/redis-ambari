@@ -70,7 +70,7 @@ class Master(Script):
 	  Execute('touch ' + params.redis_lock_file)
 	  Execute('chown ' + params.redis_user + ':' + params.redis_group + ' ' + params.redis_lock_file)
 	  Execute('/etc/init.d/redis-server start >> ' + params.redis_log_file, user= params.redis_user)
-	  Execute(mkdir -p '+status_params.redis_pid_dir)
+	  Execute('mkdir -p '+status_params.redis_pid_dir)
 	  Execute('chown -R' + params.redis_user + ':' + params.redis_group + ' ' +status_params.redis_pid_dir)
 	  Execute('ps -ef | grep -i redis-server | awk {\'print $2\'} | head -n 1 > ' + status_params.redis_pid_file, user= params.redis_user)
 	
