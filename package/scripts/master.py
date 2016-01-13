@@ -62,6 +62,7 @@ class Master(Script):
   def stop(self, env):
 	  import params
 	  Execute('/etc/init.d/redis-server stop >> ' + params.redis_log_file, user= params.redis_user)
+	  Execute('rm '+ status_params.redis_pid_file)
 	  
   def start(self, env):
 	  import params
