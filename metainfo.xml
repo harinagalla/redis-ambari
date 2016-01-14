@@ -40,7 +40,7 @@
             </osSpecifics>
             <!-- names for config files (under configuration dir) -->
       	    <configuration-dependencies>
-        	<config-type>redis-config</config-type>
+        	<config-type>redis-ambari-config</config-type>
       	    </configuration-dependencies>
             <restartRequiredAfterChange>true</restartRequiredAfterChange>
         </service>
